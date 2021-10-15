@@ -12,13 +12,14 @@ To get started:
 pip install matplotlib
 pip install mplot3d
 pip install numpy
-pip install xlwt
+pip install pandas
 python main.py
 """
 
 from mpl_toolkits import mplot3d
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import math
 
 # Arrays
@@ -46,6 +47,12 @@ for i in range(0, 185, 5):
     moment_Z.append(Moz)
     moment_Magnitude.append(Mo)
 
+# Write data to excel
+excel = [angle, moment_Magnitude, moment_X, moment_Y, moment_Z]
+write = pd.DataFrame(excel).T
+write.to_excel(excel_writer = "./data.xlsx")
+
+# Display data
 graphs, fig = plt.subplots(4)
 graphs.suptitle("Moment Components")
 fig[0].plot(angle, moment_X)
